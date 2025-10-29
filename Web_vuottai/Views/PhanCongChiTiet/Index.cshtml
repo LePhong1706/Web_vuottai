@@ -1,0 +1,77 @@
+﻿@model IEnumerable<v_PhanCong_ChiTiet>
+@{
+    ViewData["Title"] = "Phân công chi tiết";
+    var years = (IEnumerable<string>)ViewBag.NamHocs ?? Enumerable.Empty<string>();
+    string selYear = ViewBag.NamHoc as string ?? "";
+    int? selHk = ViewBag.HocKy as int?;
+}
+<p></p>
+<form method="get" class="row g-2 mb-2">
+    <div class="col-auto">
+        <select name="namHoc" class="form-select">
+            <option value="">-- Năm học --</option>
+            @foreach (var y in years)
+            {
+                <option value="@y" selected="@(selYear == y ? "selected" : null)">@y</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-auto">
+        <select name="hocKy" class="form-select">
+            <option value="">Cả năm</option>
+            <option value="1" selected="@(selHk == 1 ? "selected" : null)">Học kỳ 1</option>
+            <option value="2" selected="@(selHk == 2 ? "selected" : null)">Học kỳ 2</option>
+        </select>
+    </div>
+
+    <div class="col-auto"><button class="btn btn-primary">Lọc</button></div>
+    <div class="col-auto"><a asp-action="Create" class="btn btn-success">Thêm phân công</a></div>
+</form>
+
+<table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+            <th>GV</th>
+            <th>Đơn vị</th>
+            <th>Năm học</th>
+            <th>Học kỳ</th>
+            <th>Lớp</th>
+            <th>Môn</th>
+            <th>Loại HV</th>
+            <th>Ngôn ngữ</th>
+            <th>Ca kíp</th>
+            <th>Tiết</th>
+            <th>Giờ quy đổi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.HoTen</td>
+                <td>@r.TenDonVi</td>
+                <td>@r.NamHoc</td>
+                <td>@r.HocKy</td>
+                <td>@r.TenLop (@r.QuanSo)</td>
+                <td>@r.TenMonHoc</td>
+                <td>@r.TenLoaiHV</td>
+                <td>@r.TenNgonNgu</td>
+                <td>@r.TenCaKip</td>
+                <td>@r.SoTiet</td>
+                <td>@r.GioQuyDoi</td>
+                <td class="text-nowrap">
+                    <a asp-action="Edit" asp-route-id="@r.PhanCongId" class="btn btn-sm btn-warning">Sửa</a>
+                    <form asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@r.PhanCongId" />
+                        <input type="hidden" name="namHoc" value="@r.NamHoc" />
+                        <input type="hidden" name="hocKy" value="@r.HocKy" />
+                        <input type="hidden" name="giangVienId" value="@r.GiangVienId" />
+                        <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa phân công?')">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
