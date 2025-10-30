@@ -88,7 +88,7 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.Entity<DONGIAGIO>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__DONGIAGI__3214EC07EDE73830");
+            entity.HasKey(e => e.DonGiaId).HasName("PK__DONGIAGI__3214EC07EDE73830");
 
             entity.HasOne(d => d.ChucDanh).WithMany(p => p.DONGIAGIOs)
                 .OnDelete(DeleteBehavior.ClientSetNull)

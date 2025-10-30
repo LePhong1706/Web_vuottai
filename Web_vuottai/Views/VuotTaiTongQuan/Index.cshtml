@@ -1,35 +1,52 @@
 ﻿@model IEnumerable<Web_vuottai.Models.v_VuotTai_TongQuan>
 
-<h5>Tổng quan vượt tải</h5>
-<table class="table table-striped table-sm">
-    <thead>
-        <tr>
-            <th>Họ tên</th>
-            <th>Chức danh</th>
-            <th>Chức vụ</th>
-            <th>Năm học</th>
-            <th>Học kỳ</th>
-            <th>Giờ chuẩn</th>
-            <th>Giờ thực tế</th>
-            <th>Giờ vượt tải</th>
-            <th>Thành tiền</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var r in Model)
-        {
-            <tr>
-                <td>@r.HoTen</td>
-                <td>@r.TenChucDanh</td>
-                <td>@r.TenChucVu</td>
-                <td>@r.NamHoc</td>
-                <td>@r.HocKy</td>
-                <td>@r.GioChuan</td>
-                <td>@r.GioThucTe</td>
-                <td>@r.GioVuot</td>
-                <td>@r.ThanhTien</td>
-            </tr>
-        }
-    </tbody>
-</table>
+@{
+    ViewData["Title"] = "Tổng quan vượt tải";
+}
 
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewData["Title"]</h3>
+    </div>
+    <div class="card-body">
+        <form asp-action="Index" method="get" class="mb-3">
+            <div class="input-group">
+                <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm theo họ tên..." value="@ViewData["CurrentFilter"]">
+                <button class="btn btn-outline-primary" type="submit">Tìm kiếm</button>
+                <a asp-action="Index" class="btn btn-outline-secondary">Làm mới</a>
+            </div>
+        </form>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Chức danh</th>
+                    <th>Chức vụ</th>
+                    <th>Năm học</th>
+                    <th>Học kỳ</th>
+                    <th>Giờ chuẩn</th>
+                    <th>Giờ thực tế</th>
+                    <th>Giờ vượt tải</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var r in Model)
+                {
+                    <tr>
+                        <td>@r.HoTen</td>
+                        <td>@r.TenChucDanh</td>
+                        <td>@r.TenChucVu</td>
+                        <td>@r.NamHoc</td>
+                        <td>@r.HocKy</td>
+                        <td>@r.GioChuan</td>
+                        <td>@r.GioThucTe</td>
+                        <td>@r.GioVuot</td>
+                        <td>@r.ThanhTien</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

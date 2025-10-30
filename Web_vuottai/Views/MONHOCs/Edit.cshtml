@@ -1,0 +1,39 @@
+@model Web_vuottai.Models.MONHOC
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>CHỈNH SỬA THÔNG TIN MÔN HỌC</h1>
+
+<h4>MÔN HỌC</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MonHocId" />
+            <div class="form-group">
+                <label asp-for="MaMon" class="control-label"></label>
+                <input asp-for="MaMon" class="form-control" />
+                <span asp-validation-for="MaMon" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenMonHoc" class="control-label"></label>
+                <input asp-for="TenMonHoc" class="form-control" />
+                <span asp-validation-for="TenMonHoc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

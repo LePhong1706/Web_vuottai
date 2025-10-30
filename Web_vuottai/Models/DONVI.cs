@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web_vuottai.Models;
 
@@ -14,6 +15,7 @@ public partial class DONVI
     public int DonViId { get; set; }
 
     [StringLength(20)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)] // Thêm attribute này
     public string? MaDonVi { get; set; }
 
     [StringLength(200)]

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 using Web_vuottai.Data;
 using Web_vuottai.Models;
 
@@ -9,12 +11,18 @@ namespace Web_vuottai.Controllers
     {
         private readonly AppDbContext _db;
         public VuotTaiTongQuanController(AppDbContext db) => _db = db;
-        public async Task<IActionResult> Index(string? q)
+        public async Task<IActionResult> Index(string searchString)
         {
-            var query = _db.Set<v_VuotTai_TongQuan>().AsNoTracking();
-            if (!string.IsNullOrWhiteSpace(q))
-                query = query.Where(x => x.HoTen!.Contains(q));
-            var data = await query.ToListAsync();
+            ViewData["CurrentFilter"] = searchString;
+
+            var query = from v in _db.v_VuotTai_TongQuans select v;
+            
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(s => s.HoTen.Contains(searchString));
+            }
+
+            var data = await query.AsNoTracking().ToListAsync();
             return View(data);
         }
     }

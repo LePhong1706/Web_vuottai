@@ -1,49 +1,47 @@
 ﻿@model IEnumerable<Web_vuottai.Models.LOP>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản lý Lớp";
 }
 
-<h1>THÔNG TIN CÁC LỚP HỌC</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Mã Lớp
-            </th>
-            <th>
-                @* @Html.DisplayNameFor(model => model.TenLop) *@
-                Tên Lớp
-            </th>
-            <th>
-                @* @Html.DisplayNameFor(model => model.QuanSo) *@
-                Quân Số
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaLop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenLop)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuanSo)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LopId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LopId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LopId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">@ViewData["Title"]</h3>
+    </div>
+    <div class="card-body">
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Thêm mới</a>
+        </p>
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Mã Lớp</th>
+                    <th>Tên Lớp</th>
+                    <th>Quân Số</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaLop)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TenLop)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuanSo)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.LopId" class="btn btn-sm btn-outline-primary">Sửa</a>
+                            <a asp-action="Details" asp-route-id="@item.LopId" class="btn btn-sm btn-outline-info">Chi tiết</a>
+                            <a asp-action="Delete" asp-route-id="@item.LopId" class="btn btn-sm btn-outline-danger">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -11,7 +11,7 @@ namespace Web_vuottai.Models;
 public partial class DONGIAGIO
 {
     [Key]
-    public int Id { get; set; }
+    public int DonGiaId { get; set; }
 
     public int ChucDanhId { get; set; }
 
@@ -21,7 +21,7 @@ public partial class DONGIAGIO
     public int? HocKy { get; set; }
 
     [Column("DonGiaGio", TypeName = "decimal(18, 2)")]
-    public decimal DonGiaGio1 { get; set; }
+    public decimal DonGiaGio { get; set; }
 
     [ForeignKey("ChucDanhId")]
     [InverseProperty("DONGIAGIOs")]

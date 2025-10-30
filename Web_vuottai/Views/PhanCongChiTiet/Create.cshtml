@@ -10,20 +10,27 @@
 
     <div class="col-md-3">
         <label>Năm học</label>
-        <input class="form-control" asp-for="NamHoc" />
+        <select class="form-select" asp-for="NamHoc" asp-items="@(new SelectList((IEnumerable<string>)ViewBag.NamHocs))"></select>
     </div>
     <div class="col-md-2">
-         <label>Học kỳ</label> 
-         <input class="form-control" asp-for="HocKy" type="number" /> 
-     </div>
+        <label>Học kỳ</label>
+        <select class="form-select" asp-for="HocKy">
+            <option value="1">Học kỳ 1</option>
+            <option value="2">Học kỳ 2</option>
+        </select>
+    </div>
     <div class="col-md-4">
         <label>Giảng viên</label>
         <select class="form-select" asp-for="GiangVienId" asp-items="@(new SelectList((IEnumerable<dynamic>)ViewBag.GiangVien, "GiangVienId","HoTen"))"></select>
     </div>
     <div class="col-md-3">
-        <label>Vai trò</label>
-        <input class="form-control" asp-for="VaiTro" />
-    </div>
+    <label asp-for="VaiTro"></label> @* Dùng asp-for cho label *@
+    <select class="form-select" asp-for="VaiTro">
+        <option value="Chính">Chính</option>
+        <option value="Phụ">Phụ</option>
+    </select>
+    <span asp-validation-for="VaiTro" class="text-danger"></span> @* Thêm validation message *@
+</div>
 
     <div class="col-md-3">
         <label>Lớp</label>

@@ -50,6 +50,12 @@ namespace Web_vuottai.Controllers
         // GET: Create
         public async Task<IActionResult> Create()
         {
+            ViewBag.NamHocs = await _db.THOIKHOABIEUs
+                .Select(t => t.NamHoc)
+                .Distinct()
+                .OrderByDescending(x => x)
+                .ToListAsync();
+
             await LoadLookups();
             return View(new PhanCongEditVm { NgayHoc = DateTime.Today, SoTiet = 4 });
         }
